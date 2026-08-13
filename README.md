@@ -1,0 +1,2 @@
+# pruitt-dashboard
+Clash dashboard
