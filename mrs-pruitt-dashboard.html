@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mrs. Pruitt | Class Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+  :root{
+    --cream:#F7F4EF;
+    --cream-soft:#EFEAE1;
+    --charcoal:#2C3E50;
+    --charcoal-soft:#3D5166;
+    --teal:#2980B9;
+    --teal-soft:#DCEBF5;
+    --teal-deep:#1F5F8B;
+    --white:#FFFFFF;
+    --danger:#B23A48;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;}
+  body{
+    background:var(--cream);
+    color:var(--charcoal);
+    font-family:'Inter',system-ui,sans-serif;
+  }
+  a{color:inherit;}
+  button{font-family:inherit;}
+  :focus-visible{outline:3px solid var(--teal);outline-offset:2px;}
+
+  .page-wrap{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* ---------- HEADER ---------- */
+  .app-header{
+    background:var(--charcoal);
+    color:var(--cream);
+    padding:10px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:nowrap;
+    border-bottom:4px solid var(--teal);
+    flex:0 0 auto;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:160px;
+  }
+  .brand-mark{
+    width:36px;height:36px;flex:0 0 auto;
+    background:var(--teal);
+    color:var(--charcoal);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    border-radius:6px;
+    letter-spacing:.5px;
+  }
+  .brand-eyebrow{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--teal-soft);
+    opacity:.85;
+  }
+  .header-center{
+    flex:1;
+    text-align:center;
+    min-width:260px;
+  }
+  .headline{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:clamp(20px,2.8vw,32px);
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin:0;
+    line-height:1.05;
+  }
+  .headline .class-name{color:var(--teal);}
+  .header-sub{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    letter-spacing:1.2px;
+    text-transform:uppercase;
+    color:var(--teal-soft);
+    margin-top:2px;
+    opacity:.9;
+  }
+  .header-right{
+    text-align:right;
+    min-width:170px;
+    font-family:'Roboto Mono',monospace;
+  }
+  .header-date{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--teal-soft);}
+  .header-time{font-size:20px;font-weight:700;letter-spacing:1px;}
+  .header-tz{font-size:9px;color:var(--teal-soft);opacity:.8;}
+
+  /* ---------- TICKER ---------- */
+  .ticker-bar{
+    background:var(--teal);
+    color:var(--white);
+    overflow:hidden;
+    white-space:nowrap;
+    position:relative;
+    border-bottom:1px solid var(--teal-deep);
+    flex:0 0 auto;
+  }
+  .ticker-track{
+    display:inline-block;
+    padding-left:100%;
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.5px;
+    padding-top:6px;
+    padding-bottom:6px;
+    animation:scroll-left 32s linear infinite;
+  }
+  .ticker-track .live-dot{
+    display:inline-block;
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--charcoal);
+    margin-right:8px;
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  .ticker-sep{margin:0 22px;opacity:.6;}
+  @keyframes scroll-left{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-100%);}
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.25;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .ticker-track{animation:none;padding-left:16px;}
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    gap:16px;
+    max-width:1280px;
+    width:100%;
+    margin:0 auto;
+    padding:14px 20px 44px;
+    flex:1;
+    min-height:0;
+    overflow:hidden;
+  }
+  .layout-col{
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+    gap:12px;
+  }
+  @media (max-width:800px){
+    .layout{grid-template-columns:1fr;overflow-y:auto;}
+    html,body{overflow:auto;}
+  }
+
+  .card{
+    background:var(--white);
+    border:1px solid var(--cream-soft);
+    border-radius:10px;
+    padding:14px 16px;
+    box-shadow:0 1px 3px rgba(44,62,80,.08);
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+  }
+  .card-title{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:14px;
+    margin:0 0 10px;
+    padding-bottom:8px;
+    border-bottom:3px solid var(--teal);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    flex:0 0 auto;
+  }
+  .card-title .tag{
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    background:var(--teal-soft);
+    color:var(--teal-deep);
+    padding:3px 8px;
+    border-radius:20px;
+    letter-spacing:.5px;
+    text-transform:none;
+    font-weight:600;
+  }
+
+  /* ---------- SCHEDULE ---------- */
+  .schedule-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-bottom:14px;
+  }
+  .sched-tab{
+    flex:1 1 auto;
+    background:var(--cream-soft);
+    border:1px solid var(--cream-soft);
+    color:var(--charcoal);
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:7px 6px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:600;
+    text-align:center;
+  }
+  .sched-tab.active{
+    background:var(--teal);
+    color:var(--white);
+    border-color:var(--teal);
+  }
+  .sched-tab:hover:not(.active){background:#e4ded2;}
+
+  #periodList{
+    overflow-y:auto;
+    flex:1;
+    min-height:0;
+  }
+  .period-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:8px 10px;
+    border-radius:8px;
+    border-left:4px solid transparent;
+    margin-bottom:3px;
+  }
+  .period-row.current{
+    background:var(--teal-soft);
+    border-left-color:var(--teal);
+  }
+  .period-label{
+    font-weight:600;
+    font-size:14px;
+  }
+  .period-sub{
+    font-family:'Roboto Mono',monospace;
+    font-size:10.5px;
+    color:var(--charcoal-soft);
+    text-transform:uppercase;
+  }
+  .period-time{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    color:var(--charcoal-soft);
+    white-space:nowrap;
+  }
+  .now-chip{
+    font-family:'Roboto Mono',monospace;
+    font-size:9.5px;
+    background:var(--teal);
+    color:var(--white);
+    padding:2px 7px;
+    border-radius:10px;
+    margin-left:8px;
+    letter-spacing:.5px;
+  }
+
+  /* ---------- CLASSROOM BUTTON ---------- */
+  .classroom-box{text-align:center;flex:0 0 auto;}
+  .classroom-current{
+    font-family:'Roboto Mono',monospace;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:var(--charcoal-soft);
+    margin-bottom:8px;
+  }
+  .gc-button{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--teal);
+    color:var(--white);
+    text-decoration:none;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    font-size:14px;
+    padding:10px 22px;
+    border-radius:8px;
+    transition:background .15s ease;
+  }
+  .gc-button:hover{background:var(--teal-deep);}
+  .gc-button.disabled{
+    background:var(--cream-soft);
+    color:var(--charcoal-soft);
+    pointer-events:none;
+  }
+  .gc-icon{width:20px;height:20px;flex:0 0 auto;}
+
+  /* ---------- TODAY PLAN ---------- */
+  textarea.plan-input{
+    width:100%;
+    min-height:52px;
+    height:52px;
+    border:1px solid var(--cream-soft);
+    border-radius:8px;
+    padding:10px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    color:var(--charcoal);
+    resize:vertical;
+    background:var(--cream);
+  }
+  .row-end{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-top:6px;flex:0 0 auto;}
+  .btn{
+    font-family:'Roboto Mono',monospace;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+    padding:9px 16px;
+    border-radius:6px;
+    border:1px solid var(--teal);
+    background:var(--teal);
+    color:var(--white);
+    cursor:pointer;
+  }
+  .btn.secondary{background:transparent;color:var(--teal);}
+  .btn.ghost{background:transparent;color:var(--charcoal-soft);border-color:var(--cream-soft);}
+  .btn.danger{background:transparent;color:var(--danger);border-color:var(--danger);}
+  .saved-note{font-size:11px;color:var(--charcoal-soft);font-family:'Roboto Mono',monospace;}
+
+  /* ---------- ASSIGNMENTS ---------- */
+  .assignment-form{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;flex:0 0 auto;}
+  .assignment-form input[type="text"]{flex:2 1 160px;}
+  .assignment-form input[type="date"]{flex:1 1 130px;}
+  .classroom-sync-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex:0 0 auto;flex-wrap:wrap;}
+  .assign-item.synced{background:var(--teal-soft);border-radius:6px;}
+  .sync-tag{
+    font-family:'Roboto Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.5px;
+    background:var(--teal);color:var(--white);padding:1px 6px;border-radius:8px;margin-left:6px;
+  }
+  .course-map-row{
+    display:grid;grid-template-columns:1.6fr 1fr;gap:10px;align-items:center;margin-bottom:8px;
+  }
+  .course-map-row span{font-size:13px;font-weight:600;}
+  .course-map-row select{
+    width:100%;padding:7px 8px;border:1px solid var(--cream-soft);border-radius:6px;
+    font-size:12px;font-family:'Inter',sans-serif;background:var(--white);
+  }
+  .assignment-form input, .assignment-form select{
+    padding:8px 10px;
+    border:1px solid var(--cream-soft);
+    border-radius:6px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    background:var(--cream);
+    color:var(--charcoal);
+  }
+  .assign-list{list-style:none;margin:0;padding:0;overflow-y:auto;flex:1;min-height:0;}
+  .assign-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    padding:7px 4px;
+    border-bottom:1px solid var(--cream-soft);
+  }
+  .assign-item:last-child{border-bottom:none;}
+  .assign-main{display:flex;flex-direction:column;gap:2px;}
+  .assign-class{
+    font-family:'Roboto Mono',monospace;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    color:var(--teal-deep);
+    background:var(--teal-soft);
+    display:inline-block;
+    padding:1px 7px;
+    border-radius:10px;
+    width:fit-content;
+    margin-bottom:3px;
+  }
+  .assign-title{font-weight:600;font-size:14px;}
+  .assign-due{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--charcoal-soft);}
+  .assign-due.overdue{color:var(--danger);font-weight:700;}
+  .assign-del{
+    background:none;border:none;color:var(--charcoal-soft);
+    cursor:pointer;font-size:18px;line-height:1;padding:4px 8px;
+  }
+  .assign-del:hover{color:var(--danger);}
+  .empty-note{color:var(--charcoal-soft);font-size:13px;font-style:italic;}
+
+  /* ---------- SETTINGS ---------- */
+  .settings-launcher{
+    position:fixed;
+    bottom:10px;
+    left:14px;
+    z-index:20;
+  }
+  .settings-launcher button{
+    background:var(--white);border:1px solid var(--charcoal-soft);color:var(--charcoal-soft);
+    font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;
+    padding:6px 12px;border-radius:20px;cursor:pointer;
+    box-shadow:0 1px 4px rgba(44,62,80,.15);
+  }
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(44,62,80,.55);
+    display:none;align-items:center;justify-content:center;padding:20px;z-index:50;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal{
+    background:var(--cream);
+    border-radius:10px;
+    max-width:640px;
+    width:100%;
+    max-height:85vh;
+    overflow-y:auto;
+    padding:24px;
+  }
+  .modal h2{
+    font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:1px;
+    font-size:18px;margin:0 0 4px;
+  }
+  .modal-sub{font-size:12px;color:var(--charcoal-soft);margin:0 0 16px;}
+  .modal-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+  .modal-tab{
+    background:var(--cream-soft);border:1px solid var(--cream-soft);
+    padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:600;
+  }
+  .modal-tab.active{background:var(--teal);color:var(--white);border-color:var(--teal);}
+  .modal-panel{display:none;}
+  .modal-panel.active{display:block;}
+  .edit-row{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 0.8fr 0.8fr auto;
+    gap:8px;
+    align-items:center;
+    margin-bottom:8px;
+  }
+  .edit-row input, .edit-row select{
+    width:100%;padding:7px 8px;border:1px solid var(--cream-soft);border-radius:6px;
+    font-size:12px;font-family:'Inter',sans-serif;background:var(--white);
+  }
+  .edit-row button{
+    background:none;border:none;color:var(--charcoal-soft);cursor:pointer;font-size:16px;
+  }
+  .edit-row button:hover{color:var(--danger);}
+  .meta-row{
+    display:grid;grid-template-columns:1fr 1.2fr 1.6fr;gap:8px;align-items:center;margin-bottom:8px;
+  }
+  .meta-row label{font-size:12px;font-weight:600;}
+  .meta-row input{
+    width:100%;padding:7px 8px;border:1px solid var(--cream-soft);border-radius:6px;
+    font-size:12px;font-family:'Inter',sans-serif;background:var(--white);
+  }
+  .modal-actions{display:flex;justify-content:space-between;align-items:center;margin-top:18px;flex-wrap:wrap;gap:10px;}
+  .col-headers{
+    display:grid;grid-template-columns:1.4fr 1fr 0.8fr 0.8fr auto;gap:8px;
+    font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;
+    color:var(--charcoal-soft);margin-bottom:6px;letter-spacing:.5px;
+  }
+  .add-row-btn{margin-top:4px;}
+
+  footer.foot-note{
+    text-align:center;color:var(--charcoal-soft);font-size:11px;
+    font-family:'Roboto Mono',monospace;padding-bottom:26px;
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<header class="app-header">
+  <div class="brand">
+    <div class="brand-mark">MP</div>
+    <div>
+      <div class="brand-eyebrow">Huntingdon High School</div>
+      <div class="brand-eyebrow" style="opacity:.6;">Class Center</div>
+    </div>
+  </div>
+  <div class="header-center">
+    <h1 class="headline" id="headline">Mrs. Pruitt</h1>
+    <div class="header-sub" id="headerSub">Loading schedule&hellip;</div>
+  </div>
+  <div class="header-right">
+    <div class="header-date" id="headerDate">&nbsp;</div>
+    <div class="header-time" id="headerTime">&nbsp;</div>
+    <div class="header-tz">Central Time &bull; auto-adjusts for DST</div>
+  </div>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-track" id="tickerTrack">Loading&hellip;</div>
+</div>
+
+<div class="layout">
+  <!-- LEFT: SCHEDULE -->
+  <div class="layout-col">
+    <div class="card" style="flex:1;">
+      <div class="card-title">Today's Schedule <span class="tag" id="schedTag">Regular</span></div>
+      <div class="schedule-tabs" id="schedTabs"></div>
+      <div id="periodList"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: MAIN -->
+  <div class="layout-col">
+    <div class="card classroom-box">
+      <div class="card-title" style="justify-content:center;">Google Classroom</div>
+      <div class="classroom-current" id="classroomCurrent">&mdash;</div>
+      <a href="#" id="gcButton" class="gc-button" target="_blank" rel="noopener">
+        <svg class="gc-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 2 7l10 5 10-5-10-5zm0 7.5L4 6l8-4 8 4-8 3.5zM2 12l10 5 10-5v5l-10 5-10-5v-5z"/></svg>
+        <span id="gcButtonLabel">Open Google Classroom</span>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">What Are We Doing Today?</div>
+      <textarea class="plan-input" id="planInput" placeholder="e.g. STEAM 1/2: Elements of Design quiz + Canva practice. English 1: To Build a Fire, chapters 1-2 + vocabulary."></textarea>
+      <div class="row-end">
+        <span class="saved-note" id="planSavedNote"></span>
+        <button class="btn" id="savePlanBtn">Save</button>
+      </div>
+    </div>
+
+    <div class="card" style="flex:1;">
+      <div class="card-title">Upcoming Assignments <span class="tag" id="assignCount">0</span></div>
+
+      <div class="classroom-sync-row" id="classroomSyncRow">
+        <button class="btn secondary" id="connectClassroomBtn">Connect Google Classroom</button>
+        <span class="saved-note" id="classroomSyncNote"></span>
+      </div>
+
+      <div class="assignment-form">
+        <input type="text" id="assignTitle" placeholder="Assignment name">
+        <select id="assignClass">
+          <option value="STEAM">STEAM</option>
+          <option value="English 1">English 1</option>
+          <option value="General">General</option>
+        </select>
+        <input type="date" id="assignDue">
+        <button class="btn" id="addAssignBtn" style="flex:0 0 auto;">Add</button>
+      </div>
+      <ul class="assign-list" id="assignList"></ul>
+    </div>
+  </div>
+</div>
+
+<!-- CLASSROOM COURSE MAPPING MODAL -->
+<div class="modal-overlay" id="classroomMapOverlay">
+  <div class="modal">
+    <h2>Match Your Classroom Courses</h2>
+    <p class="modal-sub">Tell us which of your Google Classroom courses is STEAM and which is English 1, so assignments get labeled correctly. Courses you leave set to "Ignore" won't be synced.</p>
+    <div id="courseMapRows"></div>
+    <div class="modal-actions">
+      <button class="btn ghost" id="closeCourseMap">Cancel</button>
+      <button class="btn" id="saveCourseMap">Save &amp; Sync</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page-wrap -->
+
+<div class="settings-launcher">
+  <button id="openSettings">Edit Schedules</button>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h2>Edit Dashboard</h2>
+    <p class="modal-sub">Changes save on this device automatically.</p>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-panel="panelRegular">Regular</button>
+      <button class="modal-tab" data-panel="panelAlternate">Alternate</button>
+      <button class="modal-tab" data-panel="panelBreak">Break</button>
+      <button class="modal-tab" data-panel="panelEarly">Early Dismissal</button>
+      <button class="modal-tab" data-panel="panelClasses">Classes &amp; Links</button>
+    </div>
+
+    <div id="scheduleEditorPanels"></div>
+
+    <div class="modal-panel" id="panelClasses">
+      <p class="modal-sub" style="margin-top:0;">These names and links are used wherever that block appears in any schedule.</p>
+      <div id="classMetaRows"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn ghost" id="closeModal">Close</button>
+      <span class="saved-note" id="modalSavedNote"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var BLOCK_KEYS = ["homeroom","block1","block2","block3","block4","block5"];
+  var SCHEDULE_TYPES = ["regular","alternate","break","earlyDismissal"];
+  var SCHEDULE_LABELS = {regular:"Regular",alternate:"Alternate",break:"Break",earlyDismissal:"Early Dismissal"};
+  var PANEL_IDS = {regular:"panelRegular",alternate:"panelAlternate",break:"panelBreak",earlyDismissal:"panelEarly"};
+
+  var DEFAULT_META = {
+    homeroom: {label:"Homeroom", cls:"Homeroom", link:""},
+    block1:   {label:"1st Block", cls:"STEAM", link:"https://classroom.google.com/w/ODU1NjU1MDQ1MzQ5/t/all"},
+    block2:   {label:"2nd Block", cls:"English 1", link:"https://classroom.google.com/w/ODU1NjU1MDcyNjM3/t/all"},
+    block3:   {label:"3rd Block", cls:"Planning", link:""},
+    block4:   {label:"4th Block", cls:"STEAM", link:"https://classroom.google.com/w/ODU1NjU1MTIwNDc3/t/all"},
+    block5:   {label:"5th Block", cls:"English 1", link:"https://classroom.google.com/w/ODU1NjU2NDM3OTg3/t/all"}
+  };
+
+  var DEFAULT_REGULAR = [
+    {id:"reg1", blockKey:"homeroom", label:"Homeroom", start:"07:50", end:"08:00"},
+    {id:"reg2", blockKey:"block1",   label:"1st Block", start:"08:04", end:"09:14"},
+    {id:"reg3", blockKey:"block2",   label:"2nd Block", start:"09:18", end:"10:28"},
+    {id:"reg4", blockKey:"block3",   label:"3rd Block", start:"10:32", end:"11:42"},
+    {id:"reg5", blockKey:"block4",   label:"4th Block", start:"11:46", end:"13:31"},
+    {id:"reg6", blockKey:"block5",   label:"5th Block", start:"13:35", end:"14:45"}
+  ];
+
+  var DEFAULT_ALTERNATE = [
+    {id:"alt1",  blockKey:"custom",  label:"Warning Bell",        start:"07:45", end:"07:50"},
+    {id:"alt2",  blockKey:"homeroom",label:"Homeroom",             start:"07:50", end:"08:05"},
+    {id:"alt3",  blockKey:"block1",  label:"1st Block",            start:"08:10", end:"09:10"},
+    {id:"alt4",  blockKey:"block2",  label:"2nd Block",            start:"09:15", end:"10:15"},
+    {id:"alt5",  blockKey:"custom",  label:"Activity",             start:"10:20", end:"11:00"},
+    {id:"alt6",  blockKey:"block3",  label:"3rd Block",            start:"11:05", end:"12:05"},
+    {id:"alt7",  blockKey:"block4",  label:"4th Block",            start:"12:10", end:"13:35"},
+    {id:"alt8",  blockKey:"custom",  label:"1st Lunch",            start:"12:05", end:"12:35"},
+    {id:"alt9",  blockKey:"custom",  label:"2nd & 3rd Lunch",      start:"12:35", end:"13:05"},
+    {id:"alt10", blockKey:"custom",  label:"4th Lunch",            start:"13:05", end:"13:35"},
+    {id:"alt11", blockKey:"block5",  label:"5th Block",            start:"13:40", end:"14:45"},
+    {id:"alt12", blockKey:"custom",  label:"Car Riders & Drivers", start:"14:50", end:"14:50"}
+  ];
+
+  var DEFAULT_BREAK = [
+    {id:"brk1",  blockKey:"custom",  label:"Warning Bell",        start:"07:45", end:"07:50"},
+    {id:"brk2",  blockKey:"homeroom",label:"Homeroom",             start:"07:50", end:"08:00"},
+    {id:"brk3",  blockKey:"block1",  label:"1st Block",            start:"08:04", end:"09:14"},
+    {id:"brk4",  blockKey:"block2",  label:"2nd Block",            start:"09:18", end:"10:28"},
+    {id:"brk5",  blockKey:"block3",  label:"3rd Block",            start:"10:32", end:"11:42"},
+    {id:"brk6",  blockKey:"block4",  label:"4th Block",            start:"11:46", end:"13:31"},
+    {id:"brk7",  blockKey:"custom",  label:"Break",                start:"11:46", end:"12:12"},
+    {id:"brk8",  blockKey:"custom",  label:"1st Lunch",            start:"12:12", end:"12:38"},
+    {id:"brk9",  blockKey:"custom",  label:"2nd & 3rd Lunch",      start:"12:38", end:"13:04"},
+    {id:"brk10", blockKey:"custom",  label:"4th Lunch",            start:"13:04", end:"13:30"},
+    {id:"brk11", blockKey:"block5",  label:"5th Block",            start:"13:35", end:"14:45"},
+    {id:"brk12", blockKey:"custom",  label:"Car Riders & Drivers", start:"14:50", end:"14:50"}
+  ];
+
+  var DEFAULT_EARLY = [
+    {id:"ed1",  blockKey:"custom",  label:"Warning Bell",         start:"07:45", end:"07:50"},
+    {id:"ed2",  blockKey:"homeroom",label:"Homeroom",              start:"07:50", end:"08:05"},
+    {id:"ed3",  blockKey:"block1",  label:"1st Block",             start:"08:10", end:"09:10"},
+    {id:"ed4",  blockKey:"block2",  label:"2nd Block",             start:"09:15", end:"10:15"},
+    {id:"ed5",  blockKey:"block3",  label:"3rd Block",             start:"10:20", end:"11:20"},
+    {id:"ed6",  blockKey:"block4",  label:"4th Block",             start:"11:25", end:"12:20"},
+    {id:"ed7",  blockKey:"custom",  label:"1st Lunch (Vo-Tech)",   start:"11:20", end:"11:40"},
+    {id:"ed8",  blockKey:"custom",  label:"2nd & 3rd Lunch",       start:"11:40", end:"12:00"},
+    {id:"ed9",  blockKey:"custom",  label:"4th Lunch",             start:"12:00", end:"12:20"},
+    {id:"ed10", blockKey:"block5",  label:"5th Block",             start:"12:25", end:"13:30"},
+    {id:"ed11", blockKey:"custom",  label:"Early Bus",             start:"13:30", end:"13:30"},
+    {id:"ed12", blockKey:"custom",  label:"Car Riders & Drivers",  start:"13:35", end:"13:35"}
+  ];
+
+  function cloneDefault(arr){
+    return arr.map(function(p){ return Object.assign({}, p); });
+  }
+
+  var STORE_KEY = "mp_dashboard_v3";
+
+  function loadState(){
+    var raw = null;
+    try { raw = localStorage.getItem(STORE_KEY); } catch(e){}
+    var state;
+    try { state = raw ? JSON.parse(raw) : null; } catch(e){ state = null; }
+    if(!state) state = {};
+    if(!state.meta) state.meta = JSON.parse(JSON.stringify(DEFAULT_META));
+    if(!state.schedules){
+      state.schedules = {
+        regular: cloneDefault(DEFAULT_REGULAR),
+        alternate: cloneDefault(DEFAULT_ALTERNATE),
+        "break": cloneDefault(DEFAULT_BREAK),
+        earlyDismissal: cloneDefault(DEFAULT_EARLY)
+      };
+    }
+    if(!state.activeType) state.activeType = "regular";
+    if(!state.assignments) state.assignments = [];
+    if(typeof state.todayPlan !== "string") state.todayPlan = "";
+    return state;
+  }
+
+  function saveState(){
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch(e){}
+  }
+
+  var state = loadState();
+  var idCounter = Date.now();
+  function newId(){ idCounter++; return "id" + idCounter; }
+
+  /* ---------------- TIME HELPERS ---------------- */
+  function centralNow(){
+    // Uses IANA timezone so DST is handled automatically by the browser.
+    var now = new Date();
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      hour: "2-digit", minute: "2-digit", second:"2-digit", hour12:false,
+      year:"numeric", month:"long", day:"numeric", weekday:"long"
+    }).formatToParts(now);
+    var map = {};
+    parts.forEach(function(p){ map[p.type] = p.value; });
+    return map;
+  }
+
+  function minutesOf(hhmm){
+    var bits = hhmm.split(":");
+    return parseInt(bits[0],10)*60 + parseInt(bits[1],10);
+  }
+
+  function fmt12(hhmm){
+    var bits = hhmm.split(":");
+    var h = parseInt(bits[0],10);
+    var m = bits[1];
+    var suffix = h >= 12 ? "PM" : "AM";
+    var h12 = h % 12; if(h12 === 0) h12 = 12;
+    return h12 + ":" + m + " " + suffix;
+  }
+
+  /* ---------------- RENDER: HEADER / TICKER / SCHEDULE ---------------- */
+  function currentPeriodInfo(){
+    var nowParts = centralNow();
+    var nowMinutes = parseInt(nowParts.hour,10)*60 + parseInt(nowParts.minute,10);
+    var periods = state.schedules[state.activeType] || [];
+    var matches = periods.filter(function(p){
+      var s = minutesOf(p.start), e = minutesOf(p.end);
+      return nowMinutes >= s && nowMinutes < e;
+    });
+    if(matches.length === 0) return {period:null, meta:null, nowParts:nowParts};
+    var chosen = null;
+    for(var i=0;i<matches.length;i++){
+      if(matches[i].blockKey !== "custom"){ chosen = matches[i]; break; }
+    }
+    if(!chosen) chosen = matches[0];
+    return {period:chosen, meta: state.meta[chosen.blockKey] || null, nowParts:nowParts};
+  }
+
+  function renderHeader(info){
+    var headline = document.getElementById("headline");
+    var sub = document.getElementById("headerSub");
+    if(info.period){
+      var meta = info.meta;
+      var cls = meta && meta.cls ? meta.cls : null;
+      if(cls){
+        headline.innerHTML = "Mrs. Pruitt <span class=\"class-name\">" + escapeHtml(cls) + "</span>";
+      } else {
+        headline.innerHTML = "Mrs. Pruitt";
+      }
+      sub.textContent = info.period.label + " \u2022 " + fmt12(info.period.start) + " \u2013 " + fmt12(info.period.end);
+    } else {
+      headline.innerHTML = "Mrs. Pruitt";
+      sub.textContent = SCHEDULE_LABELS[state.activeType] + " schedule \u2022 no period in session";
+    }
+
+    var dateEl = document.getElementById("headerDate");
+    var timeEl = document.getElementById("headerTime");
+    var np = info.nowParts;
+    dateEl.textContent = np.weekday + ", " + np.month + " " + np.day;
+    var h = parseInt(np.hour,10);
+    var suffix = h >= 12 ? "PM" : "AM";
+    var h12 = h % 12; if(h12===0) h12=12;
+    timeEl.textContent = h12 + ":" + np.minute + ":" + np.second + " " + suffix;
+  }
+
+  function renderTicker(info){
+    var track = document.getElementById("tickerTrack");
+    var planText = state.todayPlan && state.todayPlan.trim()
+      ? state.todayPlan.trim().replace(/\s+/g," ")
+      : "No plan added yet for today \u2014 add one in the \u201cWhat Are We Doing Today\u201d card.";
+    var periodText = info.period
+      ? "CURRENT PERIOD: " + info.period.label + " (" + fmt12(info.period.start) + "\u2013" + fmt12(info.period.end) + ")"
+      : "NO PERIOD IN SESSION RIGHT NOW";
+    var html = "<span class=\"live-dot\"></span>" + escapeHtml(SCHEDULE_LABELS[state.activeType].toUpperCase()) + " SCHEDULE"
+      + "<span class=\"ticker-sep\">|</span>" + escapeHtml(periodText)
+      + "<span class=\"ticker-sep\">|</span>TODAY: " + escapeHtml(planText)
+      + "<span class=\"ticker-sep\">|</span>";
+    track.innerHTML = html + html; // duplicate for seamless-ish loop
+  }
+
+  function renderScheduleTabs(){
+    var wrap = document.getElementById("schedTabs");
+    wrap.innerHTML = "";
+    SCHEDULE_TYPES.forEach(function(t){
+      var b = document.createElement("button");
+      b.className = "sched-tab" + (state.activeType===t ? " active":"");
+      b.textContent = SCHEDULE_LABELS[t];
+      b.addEventListener("click", function(){
+        state.activeType = t;
+        saveState();
+        renderAll();
+      });
+      wrap.appendChild(b);
+    });
+  }
+
+  function renderPeriodList(info){
+    var list = document.getElementById("periodList");
+    var tag = document.getElementById("schedTag");
+    tag.textContent = SCHEDULE_LABELS[state.activeType];
+    list.innerHTML = "";
+    var periods = state.schedules[state.activeType] || [];
+    if(periods.length === 0){
+      list.innerHTML = "<p class=\"empty-note\">No periods set up for this schedule yet. Use \u201cEdit Schedules\u201d below to add them.</p>";
+      return;
+    }
+    periods.forEach(function(p){
+      var isCurrent = info.period && info.period.id === p.id;
+      var row = document.createElement("div");
+      row.className = "period-row" + (isCurrent ? " current":"");
+      var meta = state.meta[p.blockKey];
+      var subLabel = meta && meta.cls ? meta.cls : "";
+      row.innerHTML =
+        "<div>" +
+          "<div class=\"period-label\">" + escapeHtml(p.label) + (isCurrent ? "<span class=\"now-chip\">NOW</span>" : "") + "</div>" +
+          (subLabel ? "<div class=\"period-sub\">" + escapeHtml(subLabel) + "</div>" : "") +
+        "</div>" +
+        "<div class=\"period-time\">" + (p.start === p.end ? fmt12(p.start) : (fmt12(p.start) + " \u2013 " + fmt12(p.end))) + "</div>";
+      list.appendChild(row);
+    });
+  }
+
+  function renderClassroomButton(info){
+    var currentEl = document.getElementById("classroomCurrent");
+    var btn = document.getElementById("gcButton");
+    var label = document.getElementById("gcButtonLabel");
+    if(info.period){
+      var meta = info.meta;
+      var cls = meta && meta.cls ? meta.cls : info.period.label;
+      currentEl.textContent = "Current: " + cls;
+      if(meta && meta.link){
+        btn.href = meta.link;
+        btn.classList.remove("disabled");
+        label.textContent = "Open Google Classroom \u2014 " + cls;
+      } else {
+        btn.href = "#";
+        btn.classList.add("disabled");
+        label.textContent = "No Google Classroom for this period";
+      }
+    } else {
+      currentEl.textContent = "No period currently in session";
+      btn.href = "#";
+      btn.classList.add("disabled");
+      label.textContent = "No Google Classroom right now";
+    }
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  /* ---------------- TODAY PLAN ---------------- */
+  function renderPlan(){
+    var input = document.getElementById("planInput");
+    if(document.activeElement !== input){
+      input.value = state.todayPlan || "";
+    }
+  }
+  document.getElementById("savePlanBtn").addEventListener("click", function(){
+    state.todayPlan = document.getElementById("planInput").value;
+    saveState();
+    var note = document.getElementById("planSavedNote");
+    note.textContent = "Saved just now";
+    renderTicker(currentPeriodInfo());
+    setTimeout(function(){ note.textContent = ""; }, 3000);
+  });
+
+  /* ---------------- ASSIGNMENTS ---------------- */
+  function renderAssignments(){
+    var list = document.getElementById("assignList");
+    var countTag = document.getElementById("assignCount");
+    var items = state.assignments.slice().sort(function(a,b){
+      return (a.due||"9999").localeCompare(b.due||"9999");
+    });
+    countTag.textContent = items.length;
+    list.innerHTML = "";
+    if(items.length === 0){
+      list.innerHTML = "<p class=\"empty-note\">No upcoming assignments yet. Add one above.</p>";
+      return;
+    }
+    var todayStr = new Intl.DateTimeFormat("en-CA", {timeZone:"America/Chicago"}).format(new Date());
+    items.forEach(function(a){
+      var li = document.createElement("li");
+      li.className = "assign-item" + (a.source === "classroom" ? " synced" : "");
+      var overdue = a.due && a.due < todayStr;
+      var dueLabel = a.due ? formatDateLabel(a.due) : "No due date";
+      li.innerHTML =
+        "<div class=\"assign-main\">" +
+          "<span class=\"assign-class\">" + escapeHtml(a.cls) + (a.source === "classroom" ? "<span class=\"sync-tag\">Classroom</span>" : "") + "</span>" +
+          "<span class=\"assign-title\">" + escapeHtml(a.title) + "</span>" +
+          "<span class=\"assign-due" + (overdue ? " overdue":"") + "\">" + (overdue ? "Past due \u2022 " : "Due ") + dueLabel + "</span>" +
+        "</div>" +
+        "<button class=\"assign-del\" data-id=\"" + a.id + "\" aria-label=\"Delete assignment\">&times;</button>";
+      list.appendChild(li);
+    });
+    Array.prototype.forEach.call(list.querySelectorAll(".assign-del"), function(btn){
+      btn.addEventListener("click", function(){
+        var id = btn.getAttribute("data-id");
+        state.assignments = state.assignments.filter(function(a){ return a.id !== id; });
+        saveState();
+        renderAssignments();
+      });
+    });
+  }
+
+  function formatDateLabel(dateStr){
+    var d = new Date(dateStr + "T00:00:00");
+    return new Intl.DateTimeFormat("en-US", {month:"short", day:"numeric"}).format(d);
+  }
+
+  document.getElementById("addAssignBtn").addEventListener("click", function(){
+    var titleInput = document.getElementById("assignTitle");
+    var clsInput = document.getElementById("assignClass");
+    var dueInput = document.getElementById("assignDue");
+    var title = titleInput.value.trim();
+    if(!title) { titleInput.focus(); return; }
+    state.assignments.push({
+      id: newId(),
+      title: title,
+      cls: clsInput.value,
+      due: dueInput.value || ""
+    });
+    saveState();
+    titleInput.value = "";
+    dueInput.value = "";
+    renderAssignments();
+  });
+
+  /* ---------------- GOOGLE CLASSROOM SYNC ---------------- */
+  var CLASSROOM_CLIENT_ID = "93151277949-7o0k4c04dcgriluf9q4cn5shpghrhg31.apps.googleusercontent.com";
+  var CLASSROOM_SCOPES = "https://www.googleapis.com/auth/classroom.courses.readonly https://www.googleapis.com/auth/classroom.coursework.students.readonly";
+  var classroomAccessToken = null;
+  var classroomTokenClient = null;
+  var pendingCourses = null;
+
+  if(!state.classroomCourseMap) state.classroomCourseMap = {}; // courseId -> "STEAM" | "English 1" | "ignore"
+
+  function classroomNote(msg){
+    document.getElementById("classroomSyncNote").textContent = msg;
+  }
+
+  function ensureTokenClient(){
+    if(classroomTokenClient || typeof google === "undefined" || !google.accounts) return classroomTokenClient;
+    classroomTokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: CLASSROOM_CLIENT_ID,
+      scope: CLASSROOM_SCOPES,
+      callback: function(resp){
+        if(resp && resp.access_token){
+          classroomAccessToken = resp.access_token;
+          document.getElementById("connectClassroomBtn").textContent = "Sync Google Classroom Now";
+          classroomNote("Connected. Loading courses\u2026");
+          loadCoursesThenSync();
+        } else {
+          classroomNote("Sign-in didn't complete. Try again.");
+        }
+      }
+    });
+    return classroomTokenClient;
+  }
+
+  document.getElementById("connectClassroomBtn").addEventListener("click", function(){
+    var tc = ensureTokenClient();
+    if(!tc){
+      classroomNote("Still loading Google sign-in\u2014try again in a second.");
+      return;
+    }
+    classroomNote("Opening Google sign-in\u2026");
+    tc.requestAccessToken({prompt: classroomAccessToken ? "" : "consent"});
+  });
+
+  function classroomApiFetch(url){
+    return fetch(url, {
+      headers: { "Authorization": "Bearer " + classroomAccessToken }
+    }).then(function(r){
+      if(!r.ok) throw new Error("Classroom API error " + r.status);
+      return r.json();
+    });
+  }
+
+  function loadCoursesThenSync(){
+    classroomApiFetch("https://classroom.googleapis.com/v1/courses?courseStates=ACTIVE&teacherId=me")
+      .then(function(data){
+        pendingCourses = data.courses || [];
+        if(pendingCourses.length === 0){
+          classroomNote("No active courses found on your Classroom account.");
+          return;
+        }
+        var unmapped = pendingCourses.some(function(c){ return !(c.id in state.classroomCourseMap); });
+        if(unmapped){
+          openCourseMapModal();
+        } else {
+          classroomNote("Syncing assignments\u2026");
+          syncCourseworkForMappedCourses();
+        }
+      })
+      .catch(function(err){
+        classroomNote("Couldn't load courses (" + err.message + ").");
+      });
+  }
+
+  function openCourseMapModal(){
+    var wrap = document.getElementById("courseMapRows");
+    wrap.innerHTML = "";
+    pendingCourses.forEach(function(course){
+      var current = state.classroomCourseMap[course.id] || "ignore";
+      var row = document.createElement("div");
+      row.className = "course-map-row";
+      row.innerHTML =
+        "<span>" + escapeHtml(course.name) + "</span>" +
+        "<select data-course-id=\"" + course.id + "\">" +
+          "<option value=\"ignore\"" + (current==="ignore"?" selected":"") + ">Ignore</option>" +
+          "<option value=\"STEAM\"" + (current==="STEAM"?" selected":"") + ">STEAM</option>" +
+          "<option value=\"English 1\"" + (current==="English 1"?" selected":"") + ">English 1</option>" +
+        "</select>";
+      wrap.appendChild(row);
+    });
+    document.getElementById("classroomMapOverlay").classList.add("open");
+  }
+
+  document.getElementById("closeCourseMap").addEventListener("click", function(){
+    document.getElementById("classroomMapOverlay").classList.remove("open");
+    classroomNote("");
+  });
+
+  document.getElementById("saveCourseMap").addEventListener("click", function(){
+    Array.prototype.forEach.call(document.querySelectorAll("#courseMapRows select"), function(sel){
+      state.classroomCourseMap[sel.getAttribute("data-course-id")] = sel.value;
+    });
+    saveState();
+    document.getElementById("classroomMapOverlay").classList.remove("open");
+    classroomNote("Syncing assignments\u2026");
+    syncCourseworkForMappedCourses();
+  });
+
+  function syncCourseworkForMappedCourses(){
+    var mappedIds = Object.keys(state.classroomCourseMap).filter(function(id){
+      return state.classroomCourseMap[id] !== "ignore";
+    });
+    if(mappedIds.length === 0){
+      classroomNote("No courses mapped to STEAM or English 1 yet.");
+      return;
+    }
+    var fetches = mappedIds.map(function(courseId){
+      return classroomApiFetch("https://classroom.googleapis.com/v1/courses/" + courseId + "/courseWork?courseWorkStates=PUBLISHED")
+        .then(function(data){ return {courseId: courseId, work: data.courseWork || []}; })
+        .catch(function(){ return {courseId: courseId, work: []}; });
+    });
+    Promise.all(fetches).then(function(results){
+      var seenIds = {};
+      results.forEach(function(res){
+        var cls = state.classroomCourseMap[res.courseId];
+        res.work.forEach(function(w){
+          if(!w.dueDate) return; // skip work with no due date
+          seenIds[w.id] = true;
+          var due = w.dueDate.year + "-" + String(w.dueDate.month).padStart(2,"0") + "-" + String(w.dueDate.day).padStart(2,"0");
+          var existing = state.assignments.find(function(a){ return a.classroomWorkId === w.id; });
+          if(existing){
+            existing.title = w.title;
+            existing.cls = cls;
+            existing.due = due;
+          } else {
+            state.assignments.push({
+              id: newId(),
+              title: w.title,
+              cls: cls,
+              due: due,
+              source: "classroom",
+              classroomWorkId: w.id
+            });
+          }
+        });
+      });
+      // Remove previously-synced items that no longer exist in Classroom (e.g. deleted/unpublished)
+      state.assignments = state.assignments.filter(function(a){
+        return a.source !== "classroom" || seenIds[a.classroomWorkId];
+      });
+      saveState();
+      renderAssignments();
+      classroomNote("Synced " + new Date().toLocaleTimeString("en-US", {timeZone:"America/Chicago", hour:"numeric", minute:"2-digit"}));
+    });
+  }
+
+  /* ---------------- SETTINGS MODAL ---------------- */
+  var overlay = document.getElementById("modalOverlay");
+  document.getElementById("openSettings").addEventListener("click", function(){
+    buildScheduleEditors();
+    buildClassMetaEditor();
+    overlay.classList.add("open");
+  });
+  document.getElementById("closeModal").addEventListener("click", closeModal);
+  overlay.addEventListener("click", function(e){ if(e.target === overlay) closeModal(); });
+  function closeModal(){
+    overlay.classList.remove("open");
+    saveState();
+    renderAll();
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".modal-tab"), function(tab){
+    tab.addEventListener("click", function(){
+      Array.prototype.forEach.call(document.querySelectorAll(".modal-tab"), function(t){ t.classList.remove("active"); });
+      Array.prototype.forEach.call(document.querySelectorAll(".modal-panel"), function(p){ p.classList.remove("active"); });
+      tab.classList.add("active");
+      document.getElementById(tab.getAttribute("data-panel")).classList.add("active");
+    });
+  });
+
+  function blockOptionsHtml(selected){
+    return BLOCK_KEYS.map(function(k){
+      var m = DEFAULT_META[k];
+      return "<option value=\"" + k + "\"" + (k===selected?" selected":"") + ">" + escapeHtml(m.label) + "</option>";
+    }).join("") + "<option value=\"custom\"" + (selected==="custom"?" selected":"") + ">Custom / other</option>";
+  }
+
+  function buildScheduleEditors(){
+    var container = document.getElementById("scheduleEditorPanels");
+    container.innerHTML = "";
+    SCHEDULE_TYPES.forEach(function(type){
+      var panel = document.createElement("div");
+      panel.className = "modal-panel" + (type==="regular" ? " active":"");
+      panel.id = PANEL_IDS[type];
+      panel.innerHTML =
+        "<p class=\"modal-sub\" style=\"margin-top:0;\">Edit the periods for the " + SCHEDULE_LABELS[type] + " schedule.</p>" +
+        "<div class=\"col-headers\"><span>Label</span><span>Block</span><span>Start</span><span>End</span><span></span></div>" +
+        "<div class=\"rows\" data-type=\"" + type + "\"></div>" +
+        "<button class=\"btn secondary add-row-btn\" data-add=\"" + type + "\">+ Add Period</button>";
+      container.appendChild(panel);
+      renderEditorRows(type);
+    });
+
+    Array.prototype.forEach.call(container.querySelectorAll("[data-add]"), function(btn){
+      btn.addEventListener("click", function(){
+        var type = btn.getAttribute("data-add");
+        state.schedules[type].push({id:newId(), blockKey:"custom", label:"New Period", start:"08:00", end:"09:00"});
+        renderEditorRows(type);
+      });
+    });
+  }
+
+  function renderEditorRows(type){
+    var rowsWrap = document.querySelector(".rows[data-type='" + type + "']");
+    rowsWrap.innerHTML = "";
+    state.schedules[type].forEach(function(p){
+      var row = document.createElement("div");
+      row.className = "edit-row";
+      row.innerHTML =
+        "<input type=\"text\" value=\"" + escapeAttr(p.label) + "\" data-field=\"label\">" +
+        "<select data-field=\"blockKey\">" + blockOptionsHtml(p.blockKey) + "</select>" +
+        "<input type=\"time\" value=\"" + p.start + "\" data-field=\"start\">" +
+        "<input type=\"time\" value=\"" + p.end + "\" data-field=\"end\">" +
+        "<button type=\"button\" aria-label=\"Remove period\">&times;</button>";
+      row.querySelector("[data-field='label']").addEventListener("input", function(e){ p.label = e.target.value; });
+      row.querySelector("[data-field='blockKey']").addEventListener("change", function(e){ p.blockKey = e.target.value; });
+      row.querySelector("[data-field='start']").addEventListener("change", function(e){ p.start = e.target.value; });
+      row.querySelector("[data-field='end']").addEventListener("change", function(e){ p.end = e.target.value; });
+      row.querySelector("button").addEventListener("click", function(){
+        state.schedules[type] = state.schedules[type].filter(function(x){ return x.id !== p.id; });
+        renderEditorRows(type);
+      });
+      rowsWrap.appendChild(row);
+    });
+  }
+
+  function escapeAttr(s){ return escapeHtml(s); }
+
+  function buildClassMetaEditor(){
+    var wrap = document.getElementById("classMetaRows");
+    wrap.innerHTML = "<div class=\"meta-row\" style=\"font-family:'Roboto Mono',monospace;font-size:10px;text-transform:uppercase;color:var(--charcoal-soft);\"><span>Block</span><span>Class name</span><span>Classroom link</span></div>";
+    BLOCK_KEYS.forEach(function(k){
+      var meta = state.meta[k];
+      var row = document.createElement("div");
+      row.className = "meta-row";
+      row.innerHTML =
+        "<label>" + escapeHtml(DEFAULT_META[k].label) + "</label>" +
+        "<input type=\"text\" value=\"" + escapeAttr(meta.cls) + "\" placeholder=\"e.g. STEAM\" data-field=\"cls\">" +
+        "<input type=\"text\" value=\"" + escapeAttr(meta.link) + "\" placeholder=\"https://classroom.google.com/...\" data-field=\"link\">";
+      row.querySelector("[data-field='cls']").addEventListener("input", function(e){ meta.cls = e.target.value; });
+      row.querySelector("[data-field='link']").addEventListener("input", function(e){ meta.link = e.target.value; });
+      wrap.appendChild(row);
+    });
+  }
+
+  /* ---------------- MAIN RENDER LOOP ---------------- */
+  function renderAll(){
+    var info = currentPeriodInfo();
+    renderHeader(info);
+    renderTicker(info);
+    renderScheduleTabs();
+    renderPeriodList(info);
+    renderClassroomButton(info);
+    renderPlan();
+    renderAssignments();
+  }
+
+  renderAll();
+  setInterval(renderAll, 1000);
+
+})();
+</script>
+</body>
+</html>
